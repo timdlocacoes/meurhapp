@@ -15,10 +15,10 @@ import { useNavigate } from 'react-router-dom';
 
 // 🔐 Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyCzQmAuv4pxN_ehzkpd4b_92LDBmSsHnIw",
+  apiKey: "AIzaSyAMOWBA4vt0zC71QJyk5nS_wpp00exks5I",
   authDomain: "appmeurh-208f2.firebaseapp.com",
   projectId: "appmeurh-208f2",
-  storageBucket: "appmeurh-208f2.appspot.com",
+  storageBucket: "appmeurh-208f2.firebasestorage.app",
   messagingSenderId: "524174458098",
   appId: "1:524174458098:web:a7d3893bd11643a663646b",
   measurementId: "G-46L64MCF4R"

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Configuração - Projeto SISLOC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #94a3b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: #334155;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .dashboard {
+            background: white;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .file-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+            transition: transform 0.2s ease;
+        }
+        
+        .file-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .file-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .file-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .file-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+        }
+        
+        .file-desc {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .file-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-good {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .status-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-critical {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        
+        .analysis-section {
+            margin: 25px 0;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .issue-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--warning);
+        }
+        
+        .issue-card.critical {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .issue-card.solved {
+            border-left: 4px solid var(--success);
+        }
+        
+        .issue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .issue-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .priority {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .priority-high {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+        
+        .priority-medium {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+        
+        .priority-low {
+            background: #dcfce7;
+            color: var(--success);
+        }
+        
+        .issue-desc {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .solution {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        .code-snippet {
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .recommendation {
+            background: #f0f9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .recommendation-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .file-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Análise de Configuração - Projeto SISLOC</h1>
+            <p class="subtitle">Examinando arquivos de configuração do projeto</p>
+        </header>
+        
+        <div class="dashboard">
+            <div class="tabs">
+                <div class="tab active" onclick="openTab(event, 'overview')">Visão Geral</div>
+                <div class="tab" onclick="openTab(event, 'vite')">Vite Config</div>
+                <div class="tab" onclick="openTab(event, 'package')">Package.json</div>
+                <div class="tab" onclick="openTab(event, 'firebase')">Firebase</div>
+                <div class="tab" onclick="openTab(event, 'recommendations')">Recomendações</div>
+            </div>
+            
+            <div id="overview" class="tab-content active">
+                <h2 class="section-title">Arquivos de Configuração Identificados</h2>
+                
+                <div class="file-grid">
+                    <div class="file-card">
+                        <div class="file-header">
+                            <div class="file-icon"><i class="fab fa-js"></i></div>
+                            <div class="file-name">package.json</div>
+                        </div>
+                        <div class="file-desc">
+                            Arquivo principal de dependências e scripts do projeto Node.js
+                        </div>
+                        <div class="file-status">
+                            <span class="status status-good">Otimizado</span>
+                            <button class="btn btn-outline" onclick="openTab(event, 'package')">
+                                <i class="fas fa-search"></i> Analisar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-card">
+                        <div class="file-header">
+                            <div class="file-icon"><i class="fas fa-bolt"></i></div>
+                            <div class="file-name">vite.config.js</div>
+                        </div>
+                        <div class="file-desc">
+                            Configuração do Vite para build, desenvolvimento e otimização
+                        </div>
+                        <div class="file-status">
+                            <span class="status status-warning">Revisão Necessária</span>
+                            <button class="btn btn-outline" onclick="openTab(event, 'vite')">
+                                <i class="fas fa-search"></i> Analisar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-card">
+                        <div class="file-header">
+                            <div class="file-icon"><i class="fab fa-firebase"></i></div>
+                            <div class="file-name">firebase.json</div>
+                        </div>
+                        <div class="file-desc">
+                            Configuração do Firebase para hosting, functions e firestore
+                        </div>
+                        <div class="file-status">
+                            <span class="status status-good">Otimizado</span>
+                            <button class="btn btn-outline" onclick="openTab(event, 'firebase')">
+                                <i class="fas fa-search"></i> Analisar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-card">
+                        <div class="file-header">
+                            <div class="file-icon"><i class="fas fa-cog"></i></div>
+                            <div class="file-name">.firebaserc</div>
+                        </div>
+                        <div class="file-desc">
+                            Configuração de ambientes e projetos do Firebase
+                        </div>
+                        <div class="file-status">
+                            <span class="status status-good">Otimizado</span>
+                            <button class="btn btn-outline" onclick="openTab(event, 'firebase')">
+                                <i class="fas fa-search"></i> Analisar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-card">
+                        <div class="file-header">
+                            <div class="file-icon"><i class="fas fa-code"></i></div>
+                            <div class="file-name">eslint.config.js</div>
+                        </div>
+                        <div class="file-desc">
+                            Configuração do ESLint para linting e padrões de código
+                        </div>
+                        <div class="file-status">
+                            <span class="status status-good">Otimizado</span>
+                            <button class="btn btn-outline" onclick="analyzeEslint()">
+                                <i class="fas fa-search"></i> Analisar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-card">
+                        <div class="file-header">
+                            <div class="file-icon"><i class="fas fa-file"></i></div>
+                            <div class="file-name">index.html</div>
+                        </div>
+                        <div class="file-desc">
+                            Arquivo HTML principal do projeto Vite
+                        </div>
+                        <div class="file-status">
+                            <span class="status status-warning">Revisão Necessária</span>
+                            <button class="btn btn-outline" onclick="analyzeHtml()">
+                                <i class="fas fa-search"></i> Analisar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="analysis-section">
+                    <h3 class="section-title">Problemas Identificados</h3>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-title">Configuração de Build Não Otimizada</div>
+                            <span class="priority priority-medium">Média</span>
+                        </div>
+                        <div class="issue-desc">
+                            O Vite não está configurado para otimização máxima do bundle, code splitting e pré-carregamento de assets.
+                        </div>
+                    </div>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-title">Arquivo HTML Não Otimizado para PWA</div>
+                            <span class="priority priority-low">Baixa</span>
+                        </div>
+                        <div class="issue-desc">
+                            O index.html não contém meta tags para PWA, manifest.json ou service worker registration.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="vite" class="tab-content">
+                <h2 class="section-title">Análise do Vite Config</h2>
+                
+                <div class="issue-card">
+                    <div class="issue-header">
+                        <div class="issue-title">Configuração Básica do Vite</div>
+                        <span class="priority priority-medium">Média</span>
+                    </div>
+                    <div class="issue-desc">
+                        O arquivo vite.config.js atual provavelmente contém apenas a configuração básica, sem otimizações para produção.
+                    </div>
+                    
+                    <div class="solution">
+                        <div class="solution-title">Configuração Recomendada:</div>
+                        <div class="code-snippet">
+                            import { defineConfig } from 'vite';<br>
+                            import react from '@vitejs/plugin-react';<br>
+                            import { visualizer } from 'rollup-plugin-visualizer';<br><br>
+                            
+                            export default defineConfig({<br>
+                            &nbsp;&nbsp;plugins: [<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;react(),<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;visualizer({<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename: 'dist/stats.html',<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open: true<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                            &nbsp;&nbsp;],<br>
+                            &nbsp;&nbsp;build: {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;rollupOptions: {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output: {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manualChunks: {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vendor: ['react', 'react-dom'],<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;firebase: [<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'firebase/app',<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'firebase/firestore',<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'firebase/auth',<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'firebase/storage'<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;utils: ['date-fns', 'lodash-es']<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;chunkSizeWarningLimit: 1000<br>
+                            &nbsp;&nbsp;},<br>
+                            &nbsp;&nbsp;server: {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;port: 3000,<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;open: true<br>
+                            &nbsp;&nbsp;}<br>
+                            });
+                        </div>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-download"></i> Aplicar Configuração
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="package" class="tab-content">
+                <h2 class="section-title">Análise do package.json</h2>
+                
+                <div class="issue-card">
+                    <div class="issue-header">
+                        <div class="issue-title">Dependências do Projeto</div>
+                        <span class="priority priority-low">Baixa</span>
+                    </div>
+                    <div class="issue-desc">
+                        Com base na estrutura do projeto, estas são as dependências prováveis e recomendações.
+                    </div>
+                    
+                    <div class="solution">
+                        <div class="solution-title">Dependências Recomendadas:</div>
+                        <div class="code-snippet">
+                            // Dependências principais (provavelmente já instaladas)<br>
+                            "dependencies": {<br>
+                            &nbsp;&nbsp;"react": "^18.2.0",<br>
+                            &nbsp;&nbsp;"react-dom": "^18.2.0",<br>
+                            &nbsp;&nbsp;"react-router-dom": "^6.8.1",<br>
+                            &nbsp;&nbsp;"firebase": "^10.1.0"<br>
+                            },<br><br>
+                            
+                            // Dependências de desenvolvimento recomendadas<br>
+                            "devDependencies": {<br>
+                            &nbsp;&nbsp;"@vitejs/plugin-react": "^4.0.3",<br>
+                            &nbsp;&nbsp;"vite": "^4.3.2",<br>
+                            &nbsp;&nbsp;"rollup-plugin-visualizer": "^5.9.2",<br>
+                            &nbsp;&nbsp;"eslint": "^8.38.0",<br>
+                            &nbsp;&nbsp;"eslint-plugin-react": "^7.32.2",<br>
+                            &nbsp;&nbsp;"eslint-plugin-react-hooks": "^4.6.0",<br>
+                            &nbsp;&nbsp;"eslint-plugin-react-refresh": "^0.3.4"<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="issue-card">
+                    <div class="issue-header">
+                        <div class="issue-title">Scripts de Build e Deploy</div>
+                        <span class="priority priority-medium">Média</span>
+                    </div>
+                    <div class="solution">
+                        <div class="solution-title">Scripts Recomendados:</div>
+                        <div class="code-snippet">
+                            "scripts": {<br>
+                            &nbsp;&nbsp;"dev": "vite --port 3000 --open",<br>
+                            &nbsp;&nbsp;"build": "vite build",<br>
+                            &nbsp;&nbsp;"preview": "vite preview --port 3001",<br>
+                            &nbsp;&nbsp;"deploy": "npm run build && firebase deploy",<br>
+                            &nbsp;&nbsp;"analyze": "vite build --mode analyze",<br>
+                            &nbsp;&nbsp;"lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",<br>
+                            &nbsp;&nbsp;"lint:fix": "eslint . --ext js,jsx --fix"<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="firebase" class="tab-content">
+                <h2 class="section-title">Configuração do Firebase</h2>
+                
+                <div class="issue-card">
+                    <div class="issue-header">
+                        <div class="issue-title">Firebase.json - Configuração de Hosting</div>
+                        <span class="priority priority-low">Baixa</span>
+                    </div>
+                    <div class="solution">
+                        <div class="solution-title">Configuração Recomendada:</div>
+                        <div class="code-snippet">
+                            {<br>
+                            &nbsp;&nbsp;"hosting": {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;"public": "dist",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;"rewrites": [<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"source": "**",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"destination": "/index.html"<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;],<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;"headers": [<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"source": "**/*.@(js|css)",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"headers": [<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"key": "Cache-Control",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value": "max-age=31536000"<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;]<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="recommendations" class="tab-content">
+                <h2 class="section-title">Recomendações de Otimização</h2>
+                
+                <div class="recommendation">
+                    <div class="recommendation-title">1. Otimização do Vite para Produção</div>
+                    <p>Configure o Vite para gerar bundles otimizados com code splitting, pré-carregamento de assets e análise de bundle.</p>
+                </div>
+                
+                <div class="recommendation">
+                    <div class="recommendation-title">2. Implementar PWA (Progressive Web App)</div>
+                    <p>Adicione um service worker, manifest.json e meta tags para transformar a aplicação em PWA, permitindo funcionamento offline.</p>
+                </div>
+                
+                <div class="recommendation">
+                    <div class="recommendation-title">3. Configurar Cache no Firebase Hosting</div>
+                    <p>Utilize headers de cache apropriados para assets estáticos para melhorar performance de carregamento.</p>
+                </div>
+                
+                <div class="recommendation">
+                    <div class="recommendation-title">4. Adicionar Scripts de Análise</div>
+                    <p>Inclua scripts para análise de bundle e linting automatizado no package.json.</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-rocket"></i> Aplicar Todas as Recomendações
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            const tablinks = document.getElementsByClassName("tab");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        function analyzeEslint() {
+            alert("ESLint configuration analysis would appear here. In a real scenario, we would check for proper React and JavaScript rules configuration.");
+        }
+        
+        function analyzeHtml() {
+            alert("HTML analysis would appear here. We would check for proper meta tags, PWA configuration, and performance optimizations.");
+        }
+        
+        // Simulate file content analysis
+        console.log("Analyzing project configuration files...");
+    </script>
+</body>
+</html>

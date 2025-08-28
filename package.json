@@ -26,7 +26,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "analyze": "vite build --mode analyze"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
@@ -37,6 +38,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "rollup-plugin-visualizer": "^6.0.3",
     "vite": "^7.1.0"
   },
   "browserslist": {

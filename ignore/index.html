@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório Completo - Sistema Colaboradores & RH</title>
+    <title>Fase 1 - Teste e Finalização</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
             color: #333;
             line-height: 1.6;
             padding: 20px;
@@ -21,7 +21,7 @@
         }
         
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -30,7 +30,7 @@
         }
         
         header {
-            background: linear-gradient(90deg, #1a3a8f 0%, #1e40af 100%);
+            background: linear-gradient(90deg, #059669 0%, #10b981 100%);
             color: white;
             padding: 30px;
             text-align: center;
@@ -41,144 +41,120 @@
             margin-bottom: 10px;
         }
         
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 10px;
+        .progress-bar {
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            width: 95%;
+            border-radius: 5px;
         }
         
         .content {
             padding: 30px;
         }
         
-        .executive-summary {
-            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-            padding: 30px;
+        .success-alert {
+            background: #f0fdf4;
+            padding: 25px;
             border-radius: 10px;
             margin-bottom: 30px;
-            border-left: 4px solid #0ea5e9;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
+            border: 2px solid #10b981;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
         
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: #1e40af;
-            margin-bottom: 10px;
-        }
-        
-        .module {
+        .step-card {
             background: #f8fafc;
             border-radius: 10px;
             padding: 25px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
         }
         
-        .module-header {
+        .step-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 15px;
         }
         
-        .module-icon {
-            font-size: 28px;
-            margin-right: 15px;
-            width: 50px;
-            height: 50px;
+        .step-number {
             background: #3b82f6;
+            color: white;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2rem;
         }
         
-        .module-title {
-            font-size: 1.5rem;
+        .step-title {
+            font-size: 1.4rem;
             color: #1e40af;
             margin: 0;
         }
         
-        .analysis-section {
-            margin: 30px 0;
-        }
-        
-        .analysis-item {
-            background: white;
-            border-radius: 8px;
+        .terminal {
+            background: #000;
+            color: #00ff00;
             padding: 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
             margin: 15px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
         }
         
-        .good {
-            border-left: 4px solid #10b981;
+        .command {
+            color: #00ff00;
         }
         
-        .warning {
-            border-left: 4px solid #f59e0b;
+        .comment {
+            color: #94a3b8;
+            font-style: italic;
         }
         
-        .critical {
-            border-left: 4px solid #ef4444;
-        }
-        
-        .security-alert {
-            background: #fef2f2;
+        .checklist {
+            background: #f0fdf4;
             padding: 25px;
             border-radius: 10px;
             margin: 30px 0;
-            border: 2px solid #ef4444;
-            animation: pulse 2s infinite;
         }
         
-        @keyframes pulse {
-            0% { border-color: #ef4444; }
-            50% { border-color: #fca5a5; }
-            100% { border-color: #ef4444; }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
         }
         
-        .recommendations {
-            background: #f0fdf4;
-            padding: 30px;
-            border-radius: 10px;
-            margin: 30px 0;
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            border: 2px solid #10b981;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .action-plan {
-            background: #fffbeb;
-            padding: 30px;
-            border-radius: 10px;
-            margin: 30px 0;
-        }
-        
-        .phase {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 15px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        .checked {
+            background: #10b981;
+            color: white;
         }
         
         .btn {
             display: inline-block;
-            background: #1e40af;
+            background: #059669;
             color: white;
             padding: 15px 30px;
             border-radius: 30px;
@@ -192,382 +168,165 @@
         }
         
         .btn:hover {
-            background: #1a3a8f;
+            background: #047857;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-        
-        .badge-rh {
-            background: #fef3c7;
-            color: #92400e;
-        }
-        
-        .badge-colab {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-        
-        .badge-both {
-            background: #dcfce7;
-            color: #166534;
-        }
-        
-        .file-structure {
-            background: #f1f5f9;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Fira Code', monospace;
-            font-size: 14px;
-            margin: 15px 0;
-        }
-        
-        .file {
-            color: #64748b;
-            margin-left: 20px;
-        }
-        
-        .file::before {
-            content: "📄 ";
-        }
-        
-        .folder {
-            color: #1e40af;
-            font-weight: bold;
-        }
-        
-        .folder::before {
-            content: "📁 ";
-        }
-        
-        .risk-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        .risk-table th, .risk-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        .risk-table th {
-            background: #f1f5f9;
-            font-weight: 600;
-        }
-        
-        .risk-critical {
-            background: #fef2f2;
-            color: #dc2626;
-            font-weight: bold;
-        }
-        
-        .risk-high {
+        .completed-section {
             background: #fffbeb;
-            color: #d97706;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+            border-left: 4px solid #f59e0b;
         }
         
-        .risk-medium {
-            background: #f0f9ff;
-            color: #0369a1;
+        .next-phase {
+            background: #dbeafe;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Relatório de Análise Completa</h1>
-            <p class="subtitle">Sistema Colaboradores & RH - MEUAPPRH2</p>
-            <p class="subtitle">Diagnóstico, Riscos e Plano de Otimização</p>
+            <h1>✅ Passos 5 e 6 Concluídos!</h1>
+            <p>Configuração do Firebase atualizada e .gitignore verificado</p>
         </header>
         
         <div class="content">
-            <div class="executive-summary">
-                <h2>📋 Resumo Executivo</h2>
-                <p>Seu projeto é um sistema completo de gestão de colaboradores com arquitetura moderna React + Firebase, 
-                contendo <strong>58 páginas</strong> distribuídas em <strong>8 módulos funcionais</strong> com separação clara entre 
-                funcionalidades de colaboradores e RH.</p>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p>Progresso da Fase 1: 95%</p>
+            
+            <div class="success-alert">
+                <h2>🎉 Quase lá! Faltapouco para concluir a Fase 1</h2>
+                <p>Agora vamos testar se tudo está funcionando corretamente.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">7</div>
+                    <h3 class="step-title">Testar a Configuração do Firebase</h3>
+                </div>
                 
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">58</div>
-                        <div>Páginas Identificadas</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">32</div>
-                        <div>Para Colaboradores</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">26</div>
-                        <div>Para RH</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">8</div>
-                        <div>Módulos Funcionais</div>
-                    </div>
+                <p>Vamos verificar se o Firebase está conectando corretamente:</p>
+                
+                <div class="terminal">
+                    <span class="command"># Primeiro, pare o servidor se estiver rodando (Ctrl+C)</span><br>
+                    <span class="command"># Agora reinicie o servidor de desenvolvimento:</span><br>
+                    npm run dev<br>
+                    <br>
+                    <span class="command"># Abra o console do navegador (F12) e verifique:</span><br>
+                    <span class="command"># 1. Não deve haver erros de conexão com Firebase</span><br>
+                    <span class="command"># 2. Teste o login para ver se a autenticação funciona</span><br>
+                    <span class="command"># 3. Teste alguma funcionalidade do Firestore</span>
+                </div>
+                
+                <p>Se aparecer algum erro, verifique:</p>
+                <ul>
+                    <li>Se todas as variáveis no .env estão corretas</li>
+                    <li>Se os nomes das variáveis batem com o código</li>
+                    <li>Se reiniciou o servidor após criar o .env</li>
+                </ul>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">8</div>
+                    <h3 class="step-title">Verificar se o .env está sendo Ignorado pelo Git</h3>
+                </div>
+                
+                <p>Vamos confirmar que o arquivo .env não será commitado:</p>
+                
+                <div class="terminal">
+                    <span class="command"># Verifique o status do git:</span><br>
+                    git status<br>
+                    <br>
+                    <span class="command"># O .env NÃO deve aparecer como arquivo modificado</span><br>
+                    <span class="command"># Se aparecer, significa que não está no .gitignore</span><br>
+                    <br>
+                    <span class="command"># Para verificar especificamente o .env:</span><br>
+                    git check-ignore -v .env<br>
+                    <span class="comment"># Deve retornar uma linha mostrando que está sendo ignorado</span>
                 </div>
             </div>
 
-            <div class="security-alert">
-                <h2>🚨 ALERTA DE SEGURANÇA CRÍTICO</h2>
-                <p>Identificamos múltiplas instâncias do arquivo <strong>serviceAccountKey.json</strong> em seu projeto:</p>
-                <div class="file-structure">
-                    <div class="file">firebase-admin/serviceAccountKey.json</div>
-                    <div class="file">aplicar-claims-api/serviceAccountKey.json</div>
-                    <div class="file">temp/serviceAccountKey.json</div>
+            <div class="checklist">
+                <h3>✅ Checklist Final da Fase 1</h3>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox checked">✓</div>
+                    <span>Chaves antigas revogadas no Google Cloud Console</span>
                 </div>
-                <p><strong>Este é um risco de segurança GRAVE:</strong> Estas chaves fornecem acesso completo ao seu projeto Firebase.</p>
-                <p><strong>Ação Imediata Necessária:</strong></p>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox checked">✓</div>
+                    <span>Novas chaves geradas no Firebase Console</span>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox checked">✓</div>
+                    <span>Arquivo .env criado e configurado</span>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox checked">✓</div>
+                    <span>src/services/firebase.js atualizado para usar variáveis de ambiente</span>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox checked">✓</div>
+                    <span>.gitignore verificado e atualizado</span>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox" onclick="toggleCheck(this)">✓</div>
+                    <span>Configuração testada e funcionando</span>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox" onclick="toggleCheck(this)">✓</div>
+                    <span>.env confirmado como ignorado pelo git</span>
+                </div>
+            </div>
+
+            <div class="completed-section">
+                <h2>🏆 Fase 1 Quase Completa!</h2>
+                <p>Você realizou todas as etapas críticas de segurança:</p>
+                <ul>
+                    <li>✅ Removeu credenciais expostas do versionamento</li>
+                    <li>✅ Revogou chaves comprometidas</li>
+                    <li>✅ Gerou novas chaves seguras</li>
+                    <li>✅ Configurou variáveis de ambiente</li>
+                    <li>✅ Protegeu contra commit acidental</li>
+                </ul>
+            </div>
+
+            <div class="next-phase">
+                <h2>🚀 Preparação para a Fase 2</h2>
+                <p>Na próxima fase vamos focar em:</p>
                 <ol>
-                    <li>Remover TODOS os arquivos serviceAccountKey.json do versionamento</li>
-                    <li>Gerar novas chaves no Console do Firebase</li>
-                    <li>Adicionar serviceAccountKey.json ao .gitignore</li>
-                    <li>Usar variáveis de ambiente para configurações sensíveis</li>
+                    <li>Otimização de performance do Firebase</li>
+                    <li>Configuração de regras de segurança do Firestore</li>
+                    <li>Implementação de boas práticas de consultas</li>
+                    <li>Estratégias para reduzir custos</li>
                 </ol>
-            </div>
-
-            <div class="analysis-section">
-                <h2>🔍 Análise da Arquitetura</h2>
                 
-                <div class="analysis-item good">
-                    <strong>✅ Arquitetura Moderna e Bem Organizada</strong>
-                    <p>Seu projeto segue boas práticas com separação clara de concerns:</p>
-                    <ul>
-                        <li>React + Vite para frontend performático</li>
-                        <li>Firebase para backend como serviço</li>
-                        <li>Estrutura modular com components, pages, services e hooks</li>
-                        <li>Separação clara entre lógica de negócio e apresentação</li>
-                    </ul>
-                </div>
-                
-                <div class="analysis-item warning">
-                    <strong>⚠️ Inconsistências de Estrutura</strong>
-                    <p>Foram identificadas algumas questões que precisam de atenção:</p>
-                    <ul>
-                        <li>Extensões inconsistentes (.j5x vs .jsx)</li>
-                        <li>Nomenclatura inconsistente (inglês/português)</li>
-                        <li>Possível duplicação de funcionalidades</li>
-                        <li>Múltiplos arquivos de service account expostos</li>
-                    </ul>
-                </div>
-                
-                <div class="analysis-item">
-                    <strong>📊 Complexidade e Escalabilidade</strong>
-                    <p>Com 58 páginas, seu sistema atingiu um nível de complexidade que requer:</p>
-                    <ul>
-                        <li>Sistema de gerenciamento de estado (Redux/Zustand)</li>
-                        <li>Otimização de bundle com code splitting</li>
-                        <li>Estratégia de caching eficiente</li>
-                        <li>Monitoramento de performance</li>
-                    </ul>
-                </div>
-            </div>
-
-            <h2>📦 Módulos Funcionais Identificados</h2>
-            
-            <div class="module">
-                <div class="module-header">
-                    <div class="module-icon">👥</div>
-                    <h3 class="module-title">Autenticação e Acesso</h3>
-                </div>
-                <p>Sistema de login diferenciado com painéis específicos para colaboradores e RH.</p>
-            </div>
-            
-            <div class="module">
-                <div class="module-header">
-                    <div class="module-icon">📋</div>
-                    <h3 class="module-title">Solicitações</h3>
-                </div>
-                <p>Sistema completo de solicitações (férias, documentos, abono, folgas) com fluxo de aprovação.</p>
-            </div>
-            
-            <div class="module">
-                <div class="module-header">
-                    <div class="module-icon">📊</div>
-                    <h3 class="module-title">Dashboards e Gestão</h3>
-                </div>
-                <p>Painéis administrativos para RH e visão do colaborador com métricas e acompanhamento.</p>
-            </div>
-            
-            <div class="module">
-                <div class="module-header">
-                    <div class="module-icon">📁</div>
-                    <h3 class="module-title">Documentos e Arquivos</h3>
-                </div>
-                <p>Gestão documental com contracheques, contratos e documentação corporativa.</p>
-            </div>
-            
-            <div class="module">
-                <div class="module-header">
-                    <div class="module-icon">💬</div>
-                    <h3 class="module-title">Comunicação</h3>
-                </div>
-                <p>Sistema de mensagens, notificações e sugestões entre colaboradores e RH.</p>
-            </div>
-            
-            <div class="module">
-                <div class="module-header">
-                    <div class="module-icon">🏖️</div>
-                    <h3 class="module-title">Férias e Folgas</h3>
-                </div>
-                <p>Gestão completa de férias, folgas e escalas de trabalho.</p>
-            </div>
-            
-            <div class="module">
-                <div class="module-header">
-                    <div class="module-icon">🎓</div>
-                    <h3 class="module-title">Treinamentos</h3>
-                </div>
-                <p>Gestão de treinamentos corporativos e desenvolvimento profissional.</p>
-            </div>
-            
-            <div class="module">
-                <div class="module-header">
-                    <div class="module-icon">⚙️</div>
-                    <h3 class="module-title">Configurações</h3>
-                </div>
-                <p>Configurações do sistema e perfis de usuário.</p>
-            </div>
-
-            <div class="analysis-section">
-                <h2>📈 Análise de Riscos e Oportunidades</h2>
-                
-                <table class="risk-table">
-                    <tr>
-                        <th>Risco</th>
-                        <th>Nível</th>
-                        <th>Impacto</th>
-                        <th>Recomendação</th>
-                    </tr>
-                    <tr>
-                        <td>Exposição de Credenciais</td>
-                        <td class="risk-critical">Crítico</td>
-                        <td>Comprometimento completo do projeto</td>
-                        <td>Remover imediatamente e regenerar chaves</td>
-                    </tr>
-                    <tr>
-                        <td>Complexidade de Estado</td>
-                        <td class="risk-high">Alto</td>
-                        <td>Dificuldade de manutenção e bugs</td>
-                        <td>Implementar gerenciamento de estado global</td>
-                    </tr>
-                    <tr>
-                        <td>Performance Firebase</td>
-                        <td class="risk-high">Alto</td>
-                        <td>Altos custos e lentidão</td>
-                        <td>Otimizar queries e implementar cache</td>
-                    </tr>
-                    <tr>
-                        <td>Inconsistências de Código</td>
-                        <td class="risk-medium">Médio</td>
-                        <td>Dificuldade de manutenção</td>
-                        <td>Padronizar nomenclatura e estrutura</td>
-                    </tr>
-                    <tr>
-                        <td>SEO e Indexação</td>
-                        <td class="risk-medium">Médio</td>
-                        <td>Visibilidade limitada</td>
-                        <td>Implementar SSR ou SSG</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="action-plan">
-                <h2>🎯 Plano de Ação para Otimização</h2>
-                
-                <div class="phase">
-                    <h3>Fase 1: Emergencial (1-2 dias) - SEGURANÇA</h3>
-                    <ol>
-                        <li>Remover todos os serviceAccountKey.json do versionamento</li>
-                        <li>Gerar novas chaves no Firebase Console</li>
-                        <li>Configurar variáveis de ambiente</li>
-                        <li>Atualizar .gitignore</li>
-                        <li>Auditar regras de segurança do Firestore</li>
-                    </ol>
-                </div>
-                
-                <div class="phase">
-                    <h3>Fase 2: Otimização Técnica (3-5 dias) - PERFORMANCE</h3>
-                    <ol>
-                        <li>Implementar code splitting no Vite</li>
-                        <li>Configurar gerenciamento de estado (Zustand)</li>
-                        <li>Otimizar queries do Firestore com paginação</li>
-                        <li>Implementar estratégia de caching</li>
-                        <li>Configurar bundle analysis</li>
-                    </ol>
-                </div>
-                
-                <div class="phase">
-                    <h3>Fase 3: Melhorias de UX (2-3 dias) - USABILIDADE</h3>
-                    <ol>
-                        <li>Implementar PWA para acesso mobile</li>
-                        <li>Adicionar loading states e error boundaries</li>
-                        <li>Otimizar para desempenho em mobile</li>
-                        <li>Implementar breadcrumbs de navegação</li>
-                        <li>Padronizar idioma (sugiro português)</li>
-                    </ol>
-                </div>
-                
-                <div class="phase">
-                    <h3>Fase 4: Preparação para Produção (2 dias) - DEPLOY</h3>
-                    <ol>
-                        <li>Configurar GitHub Actions para CI/CD</li>
-                        <li>Implementar ambiente de staging e produção</li>
-                        <li>Configurar monitoring com Firebase Performance</li>
-                        <li>Implementar analytics de uso</li>
-                        <li>Testes de carga e performance</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="recommendations">
-                <h2>💡 Recomendações Finais</h2>
-                
-                <h3>Para Reduzir Custos do Firebase:</h3>
-                <ul>
-                    <li>Implementar paginação em todas as listas</li>
-                    <li>Usar cache estratégico para dados menos críticos</li>
-                    <li>Otimizar regras de segurança para minimizar leituras</li>
-                    <li>Monitorar uso diário no Firebase Console</li>
-                    <li>Considerar Cloud Functions para operações pesadas</li>
-                </ul>
-                
-                <h3>Para Melhorar a Manutenibilidade:</h3>
-                <ul>
-                    <li>Padronizar toda nomenclatura para português</li>
-                    <li>Corrigir extensões .j5x para .jsx</li>
-                    <li>Documentar componentes com Storybook</li>
-                    <li>Implementar testes unitários e e2e</li>
-                    <li>Criar documentação técnica da arquitetura</li>
-                </ul>
-                
-                <h3>Para Melhorar a Experiência do Usuário:</h3>
-                <ul>
-                    <li>Implementar PWA para acesso offline</li>
-                    <li>Otimizar tempo de carregamento inicial</li>
-                    <li>Adicionar busca e filtros avançados</li>
-                    <li>Implementar notificações push</li>
-                    <li>Criar tutorial de onboarding</li>
-                </ul>
-            </div>
-
-            <div style="text-align: center; margin-top: 40px;">
-                <h2>🎉 Seu projeto tem Excelente Potencial!</h2>
-                <p>Com as otimizações recomendadas, você terá um sistema profissional de gestão de RH</p>
-                <p>com performance excelente, segurança robusta e custos otimizados.</p>
-                
-                <button class="btn" onclick="alert('Vamos começar pela segurança! Por favor, confirme que removeu os serviceAccountKey.json do versionamento.')">Iniciar Implementação das Otimizações</button>
+                <button class="btn" onclick="alert('Vamos testar a configuração! Reinicie o servidor.')">Testar Configuração</button>
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleCheck(element) {
+            element.classList.toggle('checked');
+        }
+    </script>
 </body>
 </html>

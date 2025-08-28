@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otimização de Performance - Fase 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #94a3b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: #334155;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .dashboard {
+            background: white;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .analysis-section {
+            margin: 25px 0;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .issue-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--warning);
+        }
+        
+        .issue-card.critical {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .issue-card.solved {
+            border-left: 4px solid var(--success);
+        }
+        
+        .issue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .issue-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .priority {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .priority-high {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+        
+        .priority-medium {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+        
+        .priority-low {
+            background: #dcfce7;
+            color: var(--success);
+        }
+        
+        .issue-desc {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .solution {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        .code-snippet {
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .file-upload {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: #e0f2fe;
+        }
+        
+        .upload-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .stat-card {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Otimização de Performance - Fase 2</h1>
+            <p class="subtitle">Análise e melhoria do projeto existente</p>
+        </header>
+        
+        <div class="dashboard">
+            <div class="tabs">
+                <div class="tab active" onclick="openTab(event, 'analysis')">Análise do Projeto</div>
+                <div class="tab" onclick="openTab(event, 'optimization')">Otimizações</div>
+                <div class="tab" onclick="openTab(event, 'upload')">Compartilhar Código</div>
+                <div class="tab" onclick="openTab(event, 'results')">Resultados</div>
+            </div>
+            
+            <div id="analysis" class="tab-content active">
+                <h2 class="section-title">Análise do Projeto Atual</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">58</div>
+                        <div>Páginas Identificadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8</div>
+                        <div>Módulos Principais</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div>Problemas Críticos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">12</div>
+                        <div>Oportunidades de Melhoria</div>
+                    </div>
+                </div>
+                
+                <div class="analysis-section">
+                    <h3 class="section-title">Problemas Identificados</h3>
+                    
+                    <div class="issue-card critical">
+                        <div class="issue-header">
+                            <div class="issue-title">Firebase Initialization Duplicada</div>
+                            <span class="priority priority-high">Crítico</span>
+                        </div>
+                        <div class="issue-desc">
+                            Múltiplas inicializações do Firebase estão causando erro no console e afetando a performance.
+                        </div>
+                        <div class="solution">
+                            <div class="solution-title">Solução:</div>
+                            <p>Verificar se o Firebase já foi inicializado antes de criar uma nova instância.</p>
+                            <div class="code-snippet">
+                                // Firebase initialization wrapper<br>
+                                const initializeFirebase = () => {<br>
+                                &nbsp;&nbsp;if (!getApps().length) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return initializeApp(firebaseConfig);<br>
+                                &nbsp;&nbsp;} else {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return getApp();<br>
+                                &nbsp;&nbsp;}<br>
+                                };
+                            </div>
+                            <button class="btn btn-primary" onclick="openTab(event, 'optimization')">
+                                <i class="fas fa-wrench"></i> Implementar Solução
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-title">Code Splitting Não Implementado</div>
+                            <span class="priority priority-high">Alta</span>
+                        </div>
+                        <div class="issue-desc">
+                            O bundle principal está muito grande, causando tempo de carregamento inicial lento.
+                        </div>
+                        <div class="solution">
+                            <div class="solution-title">Solução:</div>
+                            <p>Implementar React.lazy() e Suspense para carregamento sob demanda de páginas.</p>
+                            <div class="code-snippet">
+                                // Substituir importações estáticas<br/>
+                                const Dashboard = lazy(() => import('./pages/Dashboard'));<br/>
+                                const Profile = lazy(() => import('./pages/Profile'));<br/><br/>
+                                
+                                // Usar com Suspense<br/>
+                                &lt;Suspense fallback={&lt;LoadingSpinner />}><br/>
+                                &nbsp;&nbsp;&lt;Routes><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path="/dashboard" element={&lt;Dashboard />} /><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path="/profile" element={&lt;Profile />} /><br/>
+                                &nbsp;&nbsp;&lt;/Routes><br/>
+                                &lt;/Suspense>
+                            </div>
+                            <button class="btn btn-primary" onclick="openTab(event, 'optimization')">
+                                <i class="fas fa-wrench"></i> Implementar Solução
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-title">Queries Firebase Não Otimizadas</div>
+                            <span class="priority priority-medium">Média</span>
+                        </div>
+                        <div class="issue-desc">
+                            Consultas ao Firestore estão trazendo mais dados do que o necessário, aumentando custos e tempo de resposta.
+                        </div>
+                        <div class="solution">
+                            <div class="solution-title">Solução:</div>
+                            <p>Implementar paginação, seleção de campos específicos e limites nas queries.</p>
+                            <div class="code-snippet">
+                                // Query otimizada com paginação<br/>
+                                const getPaginatedUsers = (lastDocument = null, limit = 10) => {<br/>
+                                &nbsp;&nbsp;let query = collection(db, 'users')<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;.orderBy('createdAt')<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;.limit(limit);<br/><br/>
+                                
+                                &nbsp;&nbsp;if (lastDocument) {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;query = query.startAfter(lastDocument);<br/>
+                                &nbsp;&nbsp;}<br/><br/>
+                                
+                                &nbsp;&nbsp;return getDocs(query);<br/>
+                                };
+                            </div>
+                            <button class="btn btn-primary" onclick="openTab(event, 'optimization')">
+                                <i class="fas fa-wrench"></i> Implementar Solução
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="optimization" class="tab-content">
+                <h2 class="section-title">Otimizações de Performance</h2>
+                
+                <div class="analysis-section">
+                    <h3 class="section-title">1. Code Splitting e Lazy Loading</h3>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-title">Configuração do Vite para Code Splitting</div>
+                            <span class="priority priority-high">Alta</span>
+                        </div>
+                        <div class="solution">
+                            <div class="solution-title">Arquivo: vite.config.js</div>
+                            <div class="code-snippet">
+                                import { defineConfig } from 'vite';<br/>
+                                import react from '@vitejs/plugin-react';<br/><br/>
+                                
+                                export default defineConfig({<br/>
+                                &nbsp;&nbsp;plugins: [react()],<br/>
+                                &nbsp;&nbsp;build: {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;rollupOptions: {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output: {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manualChunks: {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vendor: ['react', 'react-dom'],<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;firebase: ['firebase/app', 'firebase/firestore', 'firebase/auth'],<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ui: ['react-router-dom', 'styled-components']<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+                                &nbsp;&nbsp;}<br/>
+                                });
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="section-title">2. Gerenciamento de Estado com Zustand</h3>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-title">Instalação e Configuração do Zustand</div>
+                            <span class="priority priority-medium">Média</span>
+                        </div>
+                        <div class="solution">
+                            <div class="solution-title">Comando de instalação:</div>
+                            <div class="code-snippet">
+                                npm install zustand
+                            </div>
+                            
+                            <div class="solution-title">Arquivo: stores/authStore.js</div>
+                            <div class="code-snippet">
+                                import { create } from 'zustand';<br/><br/>
+                                
+                                const useAuthStore = create((set) => ({<br/>
+                                &nbsp;&nbsp;user: null,<br/>
+                                &nbsp;&nbsp;isAuthenticated: false,<br/>
+                                &nbsp;&nbsp;loading: true,<br/><br/>
+                                
+                                &nbsp;&nbsp;setUser: (user) => set({ user, isAuthenticated: !!user }),<br/>
+                                &nbsp;&nbsp;setLoading: (loading) => set({ loading }),<br/>
+                                &nbsp;&nbsp;logout: () => set({ user: null, isAuthenticated: false }),<br/>
+                                }));<br/><br/>
+                                
+                                export default useAuthStore;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="upload" class="tab-content">
+                <h2 class="section-title">Compartilhe Seus Arquivos para Análise</h2>
+                
+                <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p>Clique para selecionar arquivos do seu projeto</p>
+                    <p class="small">(ou arraste e solte arquivos aqui)</p>
+                    <input type="file" id="fileInput" multiple style="display: none;" onchange="handleFileUpload(this.files)">
+                </div>
+                
+                <div class="solution">
+                    <div class="solution-title">Arquivos de interesse para análise:</div>
+                    <ul>
+                        <li>Arquivos de configuração do Firebase (firebase.js, firebase.config.js)</li>
+                        <li>Componentes principais (App.jsx, MainLayout.jsx)</li>
+                        <li>Arquivo de rotas (AppRoutes.jsx, index.jsx)</li>
+                        <li>Exemplo de página com muitos dados (Dashboard.jsx, Relatorios.jsx)</li>
+                        <li>Arquivo de configuração do Vite (vite.config.js)</li>
+                    </ul>
+                    <p>Com esses arquivos, posso analisar e sugerir melhorias específicas para seu código.</p>
+                </div>
+            </div>
+            
+            <div id="results" class="tab-content">
+                <h2 class="section-title">Resultados Esperados</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">40-60%</div>
+                        <div>Redução no tamanho do bundle</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50%</div>
+                        <div>Redução no tempo de carregamento</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">30-40%</div>
+                        <div>Redução de leituras no Firestore</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">0</div>
+                        <div>Erros no console</div>
+                    </div>
+                </div>
+                
+                <div class="analysis-section">
+                    <h3 class="section-title">Próximos Passos</h3>
+                    
+                    <div class="issue-card solved">
+                        <div class="issue-header">
+                            <div class="issue-title">Fase 1: Segurança - CONCLUÍDA</div>
+                            <span class="priority priority-low">Concluído</span>
+                        </div>
+                    </div>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-title">Fase 2: Performance - EM ANDAMENTO</div>
+                            <span class="priority priority-medium">Em Andamento</span>
+                        </div>
+                        <div class="solution">
+                            <ol>
+                                <li>Corrigir inicialização duplicada do Firebase</li>
+                                <li>Implementar code splitting com React.lazy()</li>
+                                <li>Configurar divisão de bundles no Vite</li>
+                                <li>Implementar Zustand para gerenciamento de estado</li>
+                                <li>Otimizar queries do Firestore</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-title">Fase 3: UX e Interface</div>
+                            <span class="priority priority-low">Pendente</span>
+                        </div>
+                    </div>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-title">Fase 4: Deploy e Monitoramento</div>
+                            <span class="priority priority-low">Pendente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            const tablinks = document.getElementsByClassName("tab");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        function handleFileUpload(files) {
+            if (files.length > 0) {
+                alert(`Arquivo(s) selecionado(s): ${files.length}\n\nEm um ambiente real, esses arquivos seriam analisados para fornecer recomendações específicas.`);
+                
+                // Simular análise
+                setTimeout(() => {
+                    openTab(event, 'optimization');
+                }, 1500);
+            }
+        }
+        
+        // Simular upload de arquivo com drag and drop
+        const fileUpload = document.querySelector('.file-upload');
+        fileUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUpload.style.borderColor = '#2563eb';
+            fileUpload.style.backgroundColor = '#e0f2fe';
+        });
+        
+        fileUpload.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            fileUpload.style.borderColor = '#cbd5e1';
+            fileUpload.style.backgroundColor = '#f1f5f9';
+        });
+        
+        fileUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUpload.style.borderColor = '#cbd5e1';
+            fileUpload.style.backgroundColor = '#f1f5f9';
+            
+            if (e.dataTransfer.files.length > 0) {
+                handleFileUpload(e.dataTransfer.files);
+            }
+        });
+    </script>
+</body>
+</html>
