@@ -1,0 +1,119 @@
+.folga-page {
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  padding: 40px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.folga-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #2a2a2a;
+}
+
+.folga-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  color: #2a5298;
+}
+
+.folga-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.folga-icon {
+  font-size: 28px;
+}
+
+.folga-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.folga-info {
+  background-color: #f5f7fa;
+  padding: 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.folga-info p {
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icone-dado {
+  color: #2a5298;
+}
+
+.folga-form label {
+  font-weight: 500;
+  color: #2a2a2a;
+}
+
+.folga-form input,
+.folga-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.folga-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.btn-enviar {
+  background-color: #2a5298;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  justify-content: center;
+}
+
+.btn-enviar:hover {
+  background-color: #1e3c72;
+}
+
+.btn-voltar {
+  background-color: transparent;
+  border: none;
+  color: #2a5298;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.btn-voltar:hover {
+  color: #1e3c72;
+}

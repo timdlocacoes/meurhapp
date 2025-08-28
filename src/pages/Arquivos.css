@@ -1,0 +1,65 @@
+.arquivos-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: #1a1a1a; /* Texto principal mais escuro */
+  text-align: center;
+}
+
+.arquivos-titulo {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #111111; /* Título mais escuro */
+}
+
+.arquivos-secao {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.arquivos-secao h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #222222; /* Subtítulo mais escuro */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.arquivos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.arquivo-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.arquivo-card:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.arquivo-icon {
+  font-size: 32px;
+  color: #ff4f4f;
+  margin-bottom: 10px;
+}
+
+.arquivo-card span {
+  display: block;
+  font-size: 14px;
+  color: #1a1a1a; /* Texto dos arquivos mais escuro */
+  font-weight: 500;
+}

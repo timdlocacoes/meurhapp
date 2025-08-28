@@ -1,0 +1,277 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #2c3e50;
+}
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  transition: width 0.3s ease;
+  overflow: hidden;
+  background-color: #002b5c;
+  color: white;
+  height: 100vh;
+}
+
+.sidebar.contraida {
+  width: 60px;
+}
+
+.sidebar.expandida {
+  width: 180px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.menu li {
+  padding: 20px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.icon {
+  font-size: 24px;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+/* Conteúdo principal */
+.dashboard-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* Boas-vindas */
+.boas-vindas h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.boas-vindas p {
+  margin-top: 5px;
+  color: #7f8c8d;
+}
+
+/* Cards de resumo */
+.resumo-solicitacoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card-resumo {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card-resumo h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.card-resumo p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.card-resumo.pendentes {
+  background-color: #d6eaf8;
+}
+
+.card-resumo.aprovadas {
+  background-color: #d5f5e3;
+}
+
+.card-resumo.rejeitadas {
+  background-color: #f9ebea;
+}
+
+/* Card de solicitações */
+.card-solicitacao {
+  background-color: #fff;
+  margin-top: 30px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.icon-top {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #3498db;
+}
+
+/* Botões */
+.solicitacoes-menu {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.solicitacoes-menu button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.solicitacoes-menu button:hover {
+  background-color: #2980b9;
+}
+
+/* Caixa com nome da opção selecionada */
+.menu-label-box {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  font-weight: bold;
+  display: inline-block;
+  font-size: 14px;
+}
+
+
+/* Ícones adicionais na sidebar */
+.menu li:hover .icon {
+  transform: scale(1.2);
+  transition: transform 0.2s ease;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .menu li {
+    margin: 10px;
+  }
+
+  .dashboard-content {
+    padding: 20px;
+  }
+
+  .resumo-solicitacoes {
+    flex-direction: column;
+  }
+
+  .card-resumo {
+    width: 100%;
+  }
+
+  .solicitacoes-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .solicitacoes-menu button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+
+.nova-solicitacao-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 30px;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: 40px auto;
+  text-align: left;
+}
+
+.nova-solicitacao-card h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.nova-solicitacao-card label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+.nova-solicitacao-card input,
+.nova-solicitacao-card select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 14px;
+}
+
+.nova-solicitacao-card button {
+  background-color: #00aaff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.nova-solicitacao-card button:hover {
+  background-color: #0088cc;
+}

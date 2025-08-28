@@ -1,0 +1,74 @@
+/* home.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  overflow: hidden;
+}
+
+.home-container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to right, #1e3c72, #657ba0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+}
+
+.home-card {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.home-title {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #2a5298;
+}
+
+.home-highlight {
+  color: #1e3c72;
+}
+
+.home-subtitle {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.home-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.home-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #2a5298;
+  color: #fff;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.home-button:hover {
+  transform: scale(1.05);
+  background-color: #1e3c72;
+}

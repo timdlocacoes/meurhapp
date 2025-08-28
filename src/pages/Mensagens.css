@@ -1,0 +1,206 @@
+/* Navbar fixo e em largura total */
+.navbar {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Espaço para compensar a altura da navbar */
+body {
+  margin: 0;
+  padding-top: 70px; /* altura da navbar */
+  background-color: #eef1f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container centralizado */
+.mensagens-container {
+  max-width: 1000px;
+  min-height: 100vh; /* ocupa toda a altura da tela */
+  margin: 2rem auto;
+  padding: 24px 32px;
+  background-color: #f0f2f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  overflow-y: auto; /* ativa rolagem se necessário */
+  margin-top: 70px; /* empurra o conteúdo abaixo da navbar */
+}
+
+/* Título */
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #2c3e50;
+}
+
+/* Formulário em grid */
+.form-aviso {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.form-aviso input[type="text"],
+.form-aviso textarea {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fdfdfd;
+}
+
+.form-aviso textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.destinatario-opcoes {
+  grid-column: span 2;
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.destinatario-opcoes label {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.lista-sugestoes {
+  grid-column: span 2;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  max-height: 180px;
+  overflow-y: auto;
+  border-radius: 6px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.lista-sugestoes li {
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.lista-sugestoes li:hover {
+  background-color: #f0f0f0;
+}
+
+.form-aviso button {
+  grid-column: span 2;
+  padding: 0.75rem 2rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-self: center;
+}
+
+.form-aviso button:hover {
+  background-color: #0056b3;
+}
+
+.lista-avisos {
+   max-height: 60vh; /* altura proporcional à tela */
+  overflow-y: auto;  /* ativa rolagem vertical */
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 24px;
+  margin-bottom: 32px; /* espaço antes do rodapé */
+}
+
+
+.lista-avisos h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #34495e;
+}
+
+.aviso-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.aviso-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #2a5298;
+}
+
+.aviso-card p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.aviso-card button {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+
+.aviso-card button:hover {
+  background-color: #c0392b;
+}
+
+
+/* Mensagens.css */
+
+input[type="text"],
+textarea {
+  background-color: #fff;
+  color: #000; /* ← texto preto visível */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button {
+  background-color: #3e66acff;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+button:hover {
+  background-color: #2a5298;
+}

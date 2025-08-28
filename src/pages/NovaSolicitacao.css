@@ -1,0 +1,102 @@
+.nova-solicitacao-card {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #2c3e50;
+}
+
+.nova-solicitacao-card h3 {
+  font-size: 1.5rem;
+}
+
+.nova-solicitacao-card select,
+.nova-solicitacao-card textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.nova-solicitacao-card textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.nova-solicitacao-card button {
+  padding: 10px 20px;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.historico-solicitacoes {
+  margin-top: 30px;
+}
+
+.historico-solicitacoes h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.vazio {
+  font-style: italic;
+  color: #777;
+}
+
+.lista-historico {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.item-historico {
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.item-historico p {
+  margin: 5px 0;
+}
+
+.status {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status.pendente {
+  color: #f39c12;
+}
+
+.status.aprovada {
+  color: #27ae60;
+}
+
+.status.rejeitada {
+  color: #c0392b;
+}
+.nova-solicitacao-card select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  background-color: #ffffff;
+  color: #2c3e50;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%227%22%20viewBox%3D%220%200%2010%207%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%207%205-7z%22%20fill%3D%22%23333%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 7px;
+}

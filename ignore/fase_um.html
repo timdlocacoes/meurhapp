@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 1 - Configuração do Ambiente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            width: 60%;
+            border-radius: 5px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .success-alert {
+            background: #f0fdf4;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #10b981;
+        }
+        
+        .step-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .step-number {
+            background: #3b82f6;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .step-title {
+            font-size: 1.4rem;
+            color: #1e40af;
+            margin: 0;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .terminal {
+            background: #000;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .command {
+            color: #00ff00;
+        }
+        
+        .comment {
+            color: #94a3b8;
+            font-style: italic;
+        }
+        
+        .important {
+            background: #fffbeb;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .checklist {
+            background: #f0fdf4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            border: 2px solid #10b981;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .checked {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #059669;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background: #047857;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .file-structure {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        
+        .file {
+            color: #64748b;
+            margin-left: 20px;
+        }
+        
+        .file::before {
+            content: "📄 ";
+        }
+        
+        .folder {
+            color: #1e40af;
+            font-weight: bold;
+        }
+        
+        .folder::before {
+            content: "📁 ";
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✅ Passo 3 Concluído - Novas Chaves Criadas!</h1>
+            <p>Agora vamos configurar as variáveis de ambiente</p>
+        </header>
+        
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p>Progresso da Fase 1: 60%</p>
+            
+            <div class="success-alert">
+                <h2>🎉 Excelente! Novas chaves geradas com sucesso</h2>
+                <p>Agora você tem chaves seguras e prontas para configuração.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Configurar Variáveis de Ambiente</h3>
+                </div>
+                
+                <p>Vamos criar o arquivo <strong>.env</strong> na raiz do projeto:</p>
+                
+                <div class="terminal">
+                    <span class="command"># Execute no terminal na raiz do projeto:</span><br>
+                    touch .env<br>
+                    <span class="comment"># Isso criará o arquivo .env</span>
+                </div>
+                
+                <p>Abra o arquivo <strong>.env</strong> e adicione:</p>
+                
+                <div class="code-block">
+                    # Firebase Configuration<br>
+                    VITE_FIREBASE_API_KEY=sua_api_key_aqui<br>
+                    VITE_FIREBASE_AUTH_DOMAIN=seu-projeto.firebaseapp.com<br>
+                    VITE_FIREBASE_PROJECT_ID=seu-projeto-id<br>
+                    VITE_FIREBASE_STORAGE_BUCKET=seu-projeto.appspot.com<br>
+                    VITE_FIREBASE_MESSAGING_SENDER_ID=1234567890<br>
+                    VITE_FIREBASE_APP_ID=1:1234567890:web:abcdef123456<br>
+                    <br>
+                    # Service Account Path (apenas desenvolvimento)<br>
+                    VITE_FIREBASE_SERVICE_ACCOUNT_PATH=./serviceAccountKey.json
+                </div>
+                
+                <div class="important">
+                    <strong>🔍 Onde encontrar essas informações:</strong><br>
+                    No Firebase Console > Configurações do projeto > Seu app > Configuração SDK
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Atualizar o Arquivo .gitignore</h3>
+                </div>
+                
+                <p>Abra o arquivo <strong>.gitignore</strong> e adicione estas linhas no final:</p>
+                
+                <div class="code-block">
+                    # Environment variables<br>
+                    .env<br>
+                    .env.local<br>
+                    .env.development.local<br>
+                    .env.test.local<br>
+                    .env.production.local<br>
+                    <br>
+                    # Service account keys<br>
+                    serviceAccountKey.json<br>
+                    *serviceAccountKey*.json<br>
+                    /config/*.json<br>
+                    <br>
+                    # Firebase<br>
+                    firebase-debug.log<br>
+                    firebase-debug.*.log
+                </div>
+                
+                <div class="terminal">
+                    <span class="command"># Verifique se o .env está listado no .gitignore:</span><br>
+                    git check-ignore -v .env<br>
+                    <span class="comment"># Se não retornar nada, significa que está sendo ignorado</span>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title">Configurar o Firebase para Usar Variáveis de Ambiente</h3>
+                </div>
+                
+                <p>Abra o arquivo <strong>src/services/firebase.js</strong> e atualize para:</p>
+                
+                <div class="code-block">
+                    import { initializeApp } from 'firebase/app';<br>
+                    import { getAuth } from 'firebase/auth';<br>
+                    import { getFirestore } from 'firebase/firestore';<br>
+                    import { getStorage } from 'firebase/storage';<br>
+                    <br>
+                    const firebaseConfig = {<br>
+                    &nbsp;&nbsp;apiKey: import.meta.env.VITE_FIREBASE_API_KEY,<br>
+                    &nbsp;&nbsp;authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,<br>
+                    &nbsp;&nbsp;projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,<br>
+                    &nbsp;&nbsp;storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,<br>
+                    &nbsp;&nbsp;messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,<br>
+                    &nbsp;&nbsp;appId: import.meta.env.VITE_FIREBASE_APP_ID<br>
+                    };<br>
+                    <br>
+                    // Initialize Firebase<br>
+                    const app = initializeApp(firebaseConfig);<br>
+                    <br>
+                    // Initialize services<br>
+                    export const auth = getAuth(app);<br>
+                    export const db = getFirestore(app);<br>
+                    export const storage = getStorage(app);<br>
+                    <br>
+                    export default app;
+                </div>
+                
+                <div class="important">
+                    <strong>🔄 Reinicie o servidor de desenvolvimento:</strong><br>
+                    Após fazer essas alterações, pare e reinicie o servidor (npm run dev) para que<br>
+                    as variáveis de ambiente sejam carregadas corretamente.
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3>✅ Checklist de Progresso</h3>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox checked">✓</div>
+                    <span>Chaves antigas revogadas</span>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox checked">✓</div>
+                    <span>Novas chaves geradas</span>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox" onclick="toggleCheck(this)">✓</div>
+                    <span>Arquivo .env criado com configurações</span>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox" onclick="toggleCheck(this)">✓</div>
+                    <span>.gitignore atualizado</span>
+                </div>
+                
+                <div class="checklist-item">
+                    <div class="checklist-checkbox" onclick="toggleCheck(this)">✓</div>
+                    <span>src/services/firebase.js atualizado</span>
+                </div>
+            </div>
+
+            <div class="important">
+                <h3>📋 Próximos Passos</h3>
+                <p>Após completar esta etapa, vamos:</p>
+                <ol>
+                    <li>Testar a configuração do Firebase</li>
+                    <li>Configurar GitHub Secrets para deploy</li>
+                    <li>Verificar as regras de segurança do Firestore</li>
+                </ol>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn" onclick="alert('Vamos criar o arquivo .env!')">Próximo: Configurar Variáveis de Ambiente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCheck(element) {
+            element.classList.toggle('checked');
+        }
+    </script>
+</body>
+</html>

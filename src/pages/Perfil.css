@@ -1,0 +1,166 @@
+.perfil-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.perfil-boasvindas {
+  font-size: 26px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.perfil-msg {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.perfil-card {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 25px;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.perfil-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  font-size: 15px;
+  color: #222;
+}
+
+.perfil-info div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.perfil-info svg {
+  color: #4a90e2;
+  font-size: 18px;
+}
+
+.perfil-editar {
+  margin-top: 25px;
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.perfil-editar:hover {
+  background-color: #357ab8;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.modal h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #333;
+}
+
+.modal-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #444;
+}
+
+.modal-form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-salvar {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-salvar:hover {
+  background-color: #357ab8;
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #888;
+  cursor: pointer;
+}
+.perfil-foto {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.perfil-foto img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4a90e2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.preview-foto {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.preview-foto img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4a90e2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
