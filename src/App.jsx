@@ -1,62 +1,59 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
 
-// Componentes
+// Componentes (mantidos como importação normal por serem pequenos)
 import Navbar from './components/Navbar';
-import AprovacaoRH from './components/AprovacaoRH';
-import FormularioSolicitacao from './components/FormularioSolicitacao';
 import ProtectedRoute from './components/ProtectedRoute';
+import LoadingSpinner from './components/LoadingSpinner';
 
-// Páginas
-import Dashboard from './pages/Dashboard';
-import DashboardRh from './pages/DashboardRh';
-import DashboardColaborador from './pages/DashboardColaborador';
-import VacationRequest from './pages/VacationRequest';
-import NovaSolicitacao from './pages/NovaSolicitacao';
-import AbonoRequest from './pages/AbonoRequest';
-import FolgaRequest from './pages/FolgaRequest';
-import DocumentacaoRequest from './pages/DocumentacaoRequest';
-import Home from './pages/Home';
-import Cadastro from './pages/Cadastro';
-import EscolhaLogin from './pages/EscolhaLogin';
-import LoginColaborador from './pages/LoginColaborador';
-import LoginRh from './pages/LoginRh';
-import Perfil from './pages/Perfil';
-import Mensagens from './pages/Mensagens';
-import Desempenho from './pages/Desempenho';
-import Configuracoes from './pages/Configuracoes';
-import Arquivos from './pages/Arquivos';
-import AvisosColaborador from './pages/AvisosColaborador';
-import EscalaColaborador from './pages/EscalaColaborador';
-import HoleriteColaborador from './pages/HoleriteColaborador';
-import SolicitacoesColaborador from './pages/SolicitacoesColaborador';
-import DocumentosColaborador from './pages/DocumentosColaborador';
-import SolicitacoesRH from './pages/SolicitacoesRH';
-import MinhasSolicitacoes from './pages/MinhasSolicitacoes';
-import EventosInternos from './pages/EventosInternos';
-import Treinamentos from './pages/Treinamentos';
-import Sugestoes from './pages/Sugestoes';
-import GerenciarUsuarios from './pages/GerenciarUsuarios';
-import AjustePonto from './pages/AjustePonto';
-
-// Novas páginas de arquivos
-import ArquivosColaborador from './pages/ArquivosColaborador';
-import ArquivosRH from './pages/ArquivosRH';
-
-// Novos painéis e lançamentos
-import LancamentoFolga from './pages/LancamentoFolga';
-import PainelFolgaColaborador from './pages/PainelFolgaColaborador';
-import LancamentoDocumentacao from './pages/LancamentoDocumentacao';
-import PainelDocumentacaoColaborador from './pages/PainelDocumentacaoColaborador';
-
-// 🔧 Componente temporário para teste do Firebase (remover após validação)
-import TesteFirebase from './components/TesteFirebase';
+// 🔥 Páginas com Lazy Loading
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const DashboardRh = lazy(() => import('./pages/DashboardRh'));
+const DashboardColaborador = lazy(() => import('./pages/DashboardColaborador'));
+const VacationRequest = lazy(() => import('./pages/VacationRequest'));
+const NovaSolicitacao = lazy(() => import('./pages/NovaSolicitacao'));
+const AbonoRequest = lazy(() => import('./pages/AbonoRequest'));
+const FolgaRequest = lazy(() => import('./pages/FolgaRequest'));
+const DocumentacaoRequest = lazy(() => import('./pages/DocumentacaoRequest'));
+const Home = lazy(() => import('./pages/Home'));
+const Cadastro = lazy(() => import('./pages/Cadastro'));
+const EscolhaLogin = lazy(() => import('./pages/EscolhaLogin'));
+const LoginColaborador = lazy(() => import('./pages/LoginColaborador'));
+const LoginRh = lazy(() => import('./pages/LoginRh'));
+const Perfil = lazy(() => import('./pages/Perfil'));
+const Mensagens = lazy(() => import('./pages/Mensagens'));
+const Desempenho = lazy(() => import('./pages/Desempenho'));
+const Configuracoes = lazy(() => import('./pages/Configuracoes'));
+const Arquivos = lazy(() => import('./pages/Arquivos'));
+const AvisosColaborador = lazy(() => import('./pages/AvisosColaborador'));
+const EscalaColaborador = lazy(() => import('./pages/EscalaColaborador'));
+const HoleriteColaborador = lazy(() => import('./pages/HoleriteColaborador'));
+const SolicitacoesColaborador = lazy(() => import('./pages/SolicitacoesColaborador'));
+const DocumentosColaborador = lazy(() => import('./pages/DocumentosColaborador'));
+const SolicitacoesRH = lazy(() => import('./pages/SolicitacoesRH'));
+const MinhasSolicitacoes = lazy(() => import('./pages/MinhasSolicitacoes'));
+const EventosInternos = lazy(() => import('./pages/EventosInternos'));
+const Treinamentos = lazy(() => import('./pages/Treinamentos'));
+const Sugestoes = lazy(() => import('./pages/Sugestoes'));
+const GerenciarUsuarios = lazy(() => import('./pages/GerenciarUsuarios'));
+const AjustePonto = lazy(() => import('./pages/AjustePonto'));
+const ArquivosColaborador = lazy(() => import('./pages/ArquivosColaborador'));
+const ArquivosRH = lazy(() => import('./pages/ArquivosRH'));
+const LancamentoFolga = lazy(() => import('./pages/LancamentoFolga'));
+const PainelFolgaColaborador = lazy(() => import('./pages/PainelFolgaColaborador'));
+const LancamentoDocumentacao = lazy(() => import('./pages/LancamentoDocumentacao'));
+const PainelDocumentacaoColaborador = lazy(() => import('./pages/PainelDocumentacaoColaborador'));
+const TesteFirebase = lazy(() => import('./components/TesteFirebase'));
+const AprovacaoRH = lazy(() => import('./components/AprovacaoRH'));
+const FormularioSolicitacao = lazy(() => import('./components/FormularioSolicitacao'));
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
-        {/* Página inicial */}
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          {/* Página inicial */}
         <Route path="/" element={<Home />} />
 
         {/* Login e cadastro */}
@@ -152,7 +149,8 @@ function App() {
 
         {/* 🔍 Rota de teste temporária para Firebase */}
         <Route path="/teste-firebase" element={<TesteFirebase />} />
-      </Routes>
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
